@@ -1,8 +1,5 @@
 # Install
-run in die dir
-``` bash
-docker-compose -f ./docker/docker-compose.yml up
-```
+
 
 WebApp: Port 80
 
@@ -17,4 +14,9 @@ it has to look like this
 ``` 
 DB_PASSWORD='set_db_password'
 TMDB_API_KEY='get_an_tmdb_api_key'
+```
+
+run in dir
+``` bash
+docker-compose -f ./docker/docker-compose.yml up
 ```
