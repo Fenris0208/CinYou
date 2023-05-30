@@ -1,0 +1,40 @@
+version: '3'
+services:
+  web:
+    depends_on:
+      - database
+      - phpmyadmin
+    # image: php:8.1.1-apache-buster
+    # image: php:apache
+    # build image based on './dockerfile'
+    build: .
+    volumes:
+      - "./../:/var/www/html"
+    ports:
+      - 80:80
+      - 433:433
+  phpmyadmin: 
+    depends_on:
+      - database
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8001:80
+    environment:
+      - PMA_HOST=database 
+      - PMA_PORT=3306
+
+  database:
+    image: mysql:latest
+
+    environment:
+      MYSQL_DATABASE: cinyou
+      MYSQL_USER: authentificator
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - "./../db/:/docker-entrypoint-initdb.d"
+      # here is the persisten data 
+      # watch out because of permissions
+      - "./../db/data:/var/lib/mysql"
+   
+      

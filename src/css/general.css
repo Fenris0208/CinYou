@@ -1,0 +1,32 @@
+.bg-gray {
+    background-color: lightgray;
+}
+.round-corners{
+    border-radius: 10px;
+}
+.bg-red {
+    background-color: red;
+}
+.bg-yellow{
+    background-color: yellow;
+
+}
+.bg-green {
+    background-color: green;
+}
+.group_element{
+    background-color: white;
+    margin-bottom: 10px;
+}
+.group_element:hover {
+    background-color: #DCDCDC;
+    border-color: black;
+}
+
+.test {
+    border: 1px solid black;
+}
+.px-10{
+    padding-right: 500px;
+    padding-left: 500px;
+}

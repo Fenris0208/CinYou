@@ -1,0 +1,5 @@
+# ignore the persisten db data
+db/data/
+
+# enviroment passwd
+docker/.env

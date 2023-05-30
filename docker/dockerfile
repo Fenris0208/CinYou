@@ -1,0 +1,20 @@
+FROM php:apache
+
+# include the denied sites conf 
+COPY denied_sites.conf /etc/apache2/conf-available/
+RUN ln -s /etc/apache2/conf-available/denied_sites.conf /etc/apache2/conf-enabled/
+
+#install sendmail
+RUN apt-get update && \
+    apt-get install -y \
+        zlib1g-dev libzip-dev sendmail
+
+RUN docker-php-ext-install mysqli  
+RUN docker-php-ext-install pdo 
+RUN docker-php-ext-install pdo_mysql 
+
+# config for sendmail
+RUN echo "sendmail_path=/usr/sbin/sendmail -t -i" >> /usr/local/etc/php/conf.d/sendmail.ini 
+RUN sed -i '/#!\/bin\/sh/aservice sendmail restart' /usr/local/bin/docker-php-entrypoint
+RUN sed -i '/#!\/bin\/sh/aecho "$(hostname -i)\t$(hostname) $(hostname).localhost" >> /etc/hosts' /usr/local/bin/docker-php-entrypoint
+
